@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import Header from "../components/Header";
 import BackoHome from "../components/BackoHome";
 
 export default function RootLayout({
@@ -9,7 +8,6 @@ export default function RootLayout({
 }>) {
     return (
         <Fragment>
-            <Header />
             <BackoHome />
             {children}
         </Fragment>
