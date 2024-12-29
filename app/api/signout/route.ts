@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async () => {
     try {
         const response = NextResponse.json({
             message: "signout successfull"
