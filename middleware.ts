@@ -81,23 +81,28 @@ export const middleware = async (req: NextRequest) => {
 
         const role = req.cookies.get("role")?.value;
 
-        if (!role && !unAuthRoutes.includes(pathname)) {
+        const isDynamicPublicRoute =
+            pathname.startsWith("/courses/")
+
+        console.log("isDynamicPublicRoute", isDynamicPublicRoute)
+
+        if (!role && !unAuthRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/auth/signin", req.url));
         }
 
-        if (role === "admin" && !adminRoutes.includes(pathname)) {
+        if (role === "admin" && !adminRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/", req.url));
         }
 
-        if (role === "sub-admin" && !subAdminRoutes.includes(pathname)) {
+        if (role === "sub-admin" && !subAdminRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/", req.url));
         }
 
-        if (role === "tutor" && !tutorRoutes.includes(pathname)) {
+        if (role === "tutor" && !tutorRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/", req.url));
         }
 
-        if (role === "student" && !studentRoutes.includes(pathname)) {
+        if (role === "student" && !studentRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/", req.url));
         }
 
