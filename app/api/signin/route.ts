@@ -10,6 +10,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             httpOnly: true,
             secure: true,
         })
+        console.log(body?.role)
         return response
 
     } catch (error) {

@@ -26,10 +26,10 @@ const Main = () => {
 
     const setRoleCookie = async () => {
         try {
+            console.log("hi")
             const resp = await axios.post(`/api/signin`, {
                 role: role
-            }, { withCredentials: true }
-            )
+            }, { withCredentials: true })
         } catch (error) {
             console.error(error)
         }
