@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { redirect, usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { getDashboardPath } from '../utils/functions'
+import axios from 'axios'
 
 export const LogoutButton = () => {
     const [is_logout, set_is_logout] = useState(false)
@@ -10,8 +11,20 @@ export const LogoutButton = () => {
     useEffect(() => {
         if (!is_logout) return
         localStorage.removeItem("role")
-        redirect("/auth/signin")
+        signout()
     }, [is_logout])
+
+    const signout = async () => {
+        try {
+            const resp = await axios.post(`/api/signout`, {}, {
+                withCredentials: true
+            })
+        } catch (error) {
+            console.error(error)
+        } finally {
+            redirect("/auth/signin")
+        }
+    }
 
     return (
         <button className='cursor-pointer capitalize bg-slate-200 px-4 py-2 w-[100] text-center text-black'
