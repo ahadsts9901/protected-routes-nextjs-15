@@ -4,10 +4,25 @@ import { redirect, usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { getDashboardPath } from '../utils/functions'
 
+export const LogoutButton = () => {
+    const [is_logout, set_is_logout] = useState(false)
+
+    useEffect(() => {
+        if (!is_logout) return
+        localStorage.removeItem("role")
+        redirect("/auth/signin")
+    }, [is_logout])
+
+    return (
+        <button className='cursor-pointer capitalize bg-slate-200 px-4 py-2 w-[100] text-center text-black'
+            onClick={() => set_is_logout(true)}
+        >Logout</button>
+    )
+}
+
 const Header = () => {
     const current_path = usePathname()
     const [role, set_role] = useState<any>("")
-    const [is_logout, set_is_logout] = useState(false)
 
     const header_options = [
         { label: "Home", path: "/" },
@@ -30,12 +45,6 @@ const Header = () => {
         set_role(current_role)
     }, [])
 
-    useEffect(() => {
-        if (!is_logout) return
-        localStorage.removeItem("role")
-        redirect("/auth/signin")
-    }, [is_logout])
-
     return (
         <div className='w-full flex gap-8 gap-y-4 flex-wrap py-4 px-8 bg-slate-600 text-white mb-4'>
             {header_options?.map((opt: any, i: number) => (
@@ -43,10 +52,7 @@ const Header = () => {
                     className={`hover:underline decoration-white ${opt?.path === current_path ? "underline" : null}`}
                 >{opt?.label}</Link>
             ))}
-            {role &&
-                <button className='cursor-pointer capitalize bg-slate-200 px-4 py-2 w-[100] text-center text-black'
-                    onClick={() => set_is_logout(true)}
-                >Logout</button>}
+            {role && <LogoutButton />}
         </div>
     )
 }
