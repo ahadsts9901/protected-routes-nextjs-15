@@ -21,8 +21,6 @@ export const LogoutButton = () => {
             })
         } catch (error) {
             console.error(error)
-        } finally {
-            redirect("/auth/signin")
         }
     }
 
@@ -49,7 +47,9 @@ const Header = () => {
             role ? [
                 { label: "Profile", path: "/profile" },
                 { label: "Dashboard", path: getDashboardPath(role) },
-            ] : []
+            ] : [
+                { label: "Signin", path: "/auth/signin" },
+            ]
         ),
     ]
 
