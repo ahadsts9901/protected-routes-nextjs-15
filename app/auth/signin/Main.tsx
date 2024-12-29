@@ -17,6 +17,9 @@ const Main = () => {
             const resp = await axios.post(`/api/signin`, {
                 role: role
             }, { withCredentials: true })
+        } catch (error) {
+            console.error(error)
+        } finally {
             switch (role) {
                 case "admin":
                     redirect("/admin/analytics")
@@ -29,8 +32,6 @@ const Main = () => {
                 default:
                     redirect("/")
             }
-        } catch (error) {
-            console.error(error)
         }
     }
 

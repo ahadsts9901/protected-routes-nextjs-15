@@ -21,6 +21,8 @@ export const LogoutButton = () => {
             })
         } catch (error) {
             console.error(error)
+        } finally {
+            redirect("/auth/signin")
         }
     }
 
