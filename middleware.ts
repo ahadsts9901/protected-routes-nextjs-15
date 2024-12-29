@@ -40,10 +40,12 @@ const unAuthRoutes = [
     ...publicRoutes,
     "/auth/signin",
     "/auth/signup",
+    "/api/signin"
 ];
 
 const protectedRoute = [
-    "/profile"
+    "/profile",
+    "/api/signout"
 ];
 
 export const middleware = async (req: NextRequest) => {
