@@ -34,6 +34,7 @@ const publicRoutes = [
     "/frequently-asked-questions",
     "/privacy-policy",
     "/terms-and-conditions",
+    "/api/signout",
 ];
 
 const unAuthRoutes = [
@@ -45,7 +46,6 @@ const unAuthRoutes = [
 
 const protectedRoute = [
     "/profile",
-    "/api/signout"
 ];
 
 export const middleware = async (req: NextRequest) => {
