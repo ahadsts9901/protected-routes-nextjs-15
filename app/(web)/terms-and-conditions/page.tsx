@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Page = () => {
-  return (
-    <div>Home</div>
-  )
+    return (
+        <div>Terma And Conditions</div>
+    )
 }
 
 export default Page
