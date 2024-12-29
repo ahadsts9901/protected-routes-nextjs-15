@@ -6,25 +6,25 @@ const adminRoutes = [
     "/admin/sub-admins",
     "/admin/tutors",
     "/admin/students",
-]
+];
 
 const subAdminRoutes = [
     "/sub-admin/analytics",
     "/sub-admin/courses",
     "/sub-admin/tutors",
     "/sub-admin/students",
-]
+];
 
 const tutorRoutes = [
     "/tutor/analytics",
     "/tutor/courses",
     "/tutor/students",
-]
+];
 
 const studentRoutes = [
     "/student/analytics",
     "/student/courses",
-]
+];
 
 const publicRoutes = [
     "/",
@@ -34,26 +34,39 @@ const publicRoutes = [
     "/frequently-asked-questions",
     "/privacy-policy",
     "/terms-and-conditions",
-]
+];
 
 const unAuthRoutes = [
+    ...publicRoutes,
     "/auth/signin",
     "/auth/signup",
-]
+];
 
 const protectedRoute = [
     "/profile"
-]
+];
 
-export const middleware = async (req: NextRequest, res: NextResponse) => {
+export const middleware = async (req: NextRequest) => {
     try {
-        // NextResponse.redirect(new URL("/contact"))
-        const role = req.cookies.get("role")?.value
+        const { pathname } = req.nextUrl;
+
+        if (pathname.startsWith("/_next")) {
+            return NextResponse.next();
+        }
+
+        const role = req.cookies.get("role")?.value;
+
+        if (!role && !unAuthRoutes.includes(pathname)) {
+            return NextResponse.redirect(new URL("/auth/signin", req.url));
+        }
+
+        return NextResponse.next();
 
     } catch (error) {
-        console.error(error)
-        NextResponse.json({
-            message: "middleware server error"
-        }, { status: 500 })
+        console.error(error);
+        return NextResponse.json(
+            { message: "Middleware server error" },
+            { status: 500 }
+        );
     }
-}
+};
