@@ -33,7 +33,7 @@ const Main = () => {
         if (!role) return
         localStorage.setItem("role", role)
         setRoleCookie()
-    }, [role, setRoleCookie])
+    }, [role])
 
     const role_options = ["admin", "sub-admin", "tutor", "student"]
 
