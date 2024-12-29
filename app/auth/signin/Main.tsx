@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -8,6 +9,7 @@ const Main = () => {
     useEffect(() => {
         if (!role) return
         localStorage.setItem("role", role)
+        setRoleCookie()
         switch (role) {
             case "admin":
                 redirect("/admin/analytics")
@@ -21,6 +23,17 @@ const Main = () => {
                 redirect("/")
         }
     }, [role])
+
+    const setRoleCookie = async () => {
+        try {
+            const resp = await axios.post(`/api/signin`, {
+                role: role
+            }, { withCredentials: true }
+            )
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     const role_options = ["admin", "sub-admin", "tutor", "student"]
 
