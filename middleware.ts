@@ -27,11 +27,22 @@ const studentRoutes = [
 ]
 
 const publicRoutes = [
-    "",
-    "",
-    "",
-    "",
-    "",
+    "/",
+    "/about",
+    "/contact",
+    "/courses",
+    "/frequently-asked-questions",
+    "/privacy-policy",
+    "/terms-and-conditions",
+]
+
+const unAuthRoutes = [
+    "/auth/signin",
+    "/auth/signup",
+]
+
+const protectedRoute = [
+    "/profile"
 ]
 
 export const middleware = async (req: NextRequest, res: NextResponse) => {
