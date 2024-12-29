@@ -8,7 +8,6 @@ const publicRoutes = [
     "/frequently-asked-questions",
     "/privacy-policy",
     "/terms-and-conditions",
-    "/api/signout",
 ];
 
 const adminRoutes = [
@@ -49,7 +48,6 @@ const unAuthRoutes = [
     ...publicRoutes,
     "/auth/signin",
     "/auth/signup",
-    "/api/signin"
 ];
 
 export const middleware = async (req: NextRequest) => {
