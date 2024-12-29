@@ -10,26 +10,25 @@ const Main = () => {
         if (!role) return
         localStorage.setItem("role", role)
         setRoleCookie()
-        switch (role) {
-            case "admin":
-                redirect("/admin/analytics")
-            case "sub-admin":
-                redirect("/sub-admin/analytics")
-            case "tutor":
-                redirect("/tutor/analytics")
-            case "student":
-                redirect("/student/analytics")
-            default:
-                redirect("/")
-        }
     }, [role])
 
     const setRoleCookie = async () => {
         try {
-            console.log("hi")
             const resp = await axios.post(`/api/signin`, {
                 role: role
             }, { withCredentials: true })
+            switch (role) {
+                case "admin":
+                    redirect("/admin/analytics")
+                case "sub-admin":
+                    redirect("/sub-admin/analytics")
+                case "tutor":
+                    redirect("/tutor/analytics")
+                case "student":
+                    redirect("/student/analytics")
+                default:
+                    redirect("/")
+            }
         } catch (error) {
             console.error(error)
         }
