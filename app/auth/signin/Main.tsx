@@ -6,15 +6,9 @@ import React, { useEffect, useState } from 'react'
 const Main = () => {
     const [role, set_role] = useState("")
 
-    useEffect(() => {
-        if (!role) return
-        localStorage.setItem("role", role)
-        setRoleCookie()
-    }, [role])
-
     const setRoleCookie = async () => {
         try {
-            const resp = await axios.post(`/api/signin`, {
+            await axios.post(`/api/signin`, {
                 role: role
             }, { withCredentials: true })
         } catch (error) {
@@ -34,6 +28,12 @@ const Main = () => {
             }
         }
     }
+
+    useEffect(() => {
+        if (!role) return
+        localStorage.setItem("role", role)
+        setRoleCookie()
+    }, [role, setRoleCookie])
 
     const role_options = ["admin", "sub-admin", "tutor", "student"]
 

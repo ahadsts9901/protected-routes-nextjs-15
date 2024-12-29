@@ -16,7 +16,7 @@ export const LogoutButton = () => {
 
     const signout = async () => {
         try {
-            const resp = await axios.post(`/api/signout`, {}, {
+            await axios.post(`/api/signout`, {}, {
                 withCredentials: true
             })
         } catch (error) {
