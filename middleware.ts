@@ -84,8 +84,6 @@ export const middleware = async (req: NextRequest) => {
         const isDynamicPublicRoute =
             pathname.startsWith("/courses/")
 
-        console.log("isDynamicPublicRoute", isDynamicPublicRoute)
-
         if (!role && !unAuthRoutes.includes(pathname) && !isDynamicPublicRoute) {
             return NextResponse.redirect(new URL("/auth/signin", req.url));
         }
