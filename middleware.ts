@@ -10,8 +10,25 @@ const publicRoutes = [
     "/terms-and-conditions",
 ];
 
+const adminApiRoutes = [
+    "/api/signout"
+]
+
+const subAdminApiRoutes = [
+    "/api/signout"
+]
+
+const tutorApiRoutes = [
+    "/api/signout"
+]
+
+const studentApiRoutes = [
+    "/api/signout"
+]
+
 const adminRoutes = [
     ...publicRoutes,
+    ...adminApiRoutes,
     "/admin/analytics",
     "/admin/courses",
     "/admin/sub-admins",
@@ -21,6 +38,7 @@ const adminRoutes = [
 
 const subAdminRoutes = [
     ...publicRoutes,
+    ...subAdminApiRoutes,
     "/sub-admin/analytics",
     "/sub-admin/courses",
     "/profile",
@@ -31,6 +49,7 @@ const subAdminRoutes = [
 
 const tutorRoutes = [
     ...publicRoutes,
+    ...tutorApiRoutes,
     "/tutor/analytics",
     "/tutor/courses",
     "/tutor/students",
@@ -39,6 +58,7 @@ const tutorRoutes = [
 
 const studentRoutes = [
     ...publicRoutes,
+    ...studentApiRoutes,
     "/student/analytics",
     "/student/courses",
     "/profile",
@@ -48,6 +68,7 @@ const unAuthRoutes = [
     ...publicRoutes,
     "/auth/signin",
     "/auth/signup",
+    "/api/signin",
 ];
 
 export const middleware = async (req: NextRequest) => {
